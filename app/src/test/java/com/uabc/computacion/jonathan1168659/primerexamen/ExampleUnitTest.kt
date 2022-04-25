@@ -1,8 +1,10 @@
 package com.uabc.computacion.jonathan1168659.primerexamen
 
+import com.uabc.computacion.jonathan1168659.primerexamen.model.Secuencia
 import org.junit.Test
 
 import org.junit.Assert.*
+import java.lang.Exception
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -15,5 +17,25 @@ class ExampleUnitTest
     fun addition_isCorrect()
     {
         assertEquals(4, 2 + 2)
+    }
+
+    @Test
+    fun pruebaSecuencia()
+    {
+        val secuencia = Secuencia.getNew(1)
+        println(secuencia.toString())
+        val secuencia2 = Secuencia.getNew(1)
+        println(secuencia2.toString())
+        println("secuencia == secuencia2 ? ${secuencia.compareTo(secuencia2)}")
+        try
+        {
+            val secuencia3 = Secuencia.getNew(0)
+        }
+        catch (e : Exception) { e.printStackTrace() }
+        try
+        {
+            val secuencia4 = Secuencia.getNew(4)
+        }
+        catch (e : Exception) { e.printStackTrace() }
     }
 }
