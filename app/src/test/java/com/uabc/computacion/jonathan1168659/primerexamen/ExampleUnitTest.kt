@@ -1,5 +1,6 @@
 package com.uabc.computacion.jonathan1168659.primerexamen
 
+import com.uabc.computacion.jonathan1168659.primerexamen.model.JuegoSecuencias
 import com.uabc.computacion.jonathan1168659.primerexamen.model.Secuencia
 import org.junit.Test
 
@@ -22,20 +23,60 @@ class ExampleUnitTest
     @Test
     fun pruebaSecuencia()
     {
-        val secuencia = Secuencia.getNew(1)
+        val secuencia = Secuencia.getNewInstance(1)
         println(secuencia.toString())
-        val secuencia2 = Secuencia.getNew(1)
+        val secuencia2 = Secuencia.getNewInstance(1)
         println(secuencia2.toString())
         println("secuencia == secuencia2 ? ${secuencia.compareTo(secuencia2)}")
         try
         {
-            val secuencia3 = Secuencia.getNew(0)
+            val secuencia3 = Secuencia.getNewInstance(0)
         }
         catch (e : Exception) { e.printStackTrace() }
         try
         {
-            val secuencia4 = Secuencia.getNew(4)
+            val secuencia4 = Secuencia.getNewInstance(4)
         }
         catch (e : Exception) { e.printStackTrace() }
+    }
+
+    @Test
+    fun pruebaGenerarTresSecuencias()
+    {
+        val juego = JuegoSecuencias()
+
+        for (i in 1..5)
+        {
+            println("Iteración $i")
+            for (secuencia in juego.generarTresSecuencias())
+            {
+                println(secuencia.elementosVisiblesToString())
+            }
+            Secuencia.resetearSeleccionDeSecuencias()
+        }
+
+        juego.nivel = 2
+        for (i in 1..5)
+        {
+            println("Iteración $i")
+            val secuenciasGeneradas = juego.generarTresSecuencias()
+            for (secuencia in secuenciasGeneradas)
+            {
+                println(secuencia.elementosVisiblesToString())
+            }
+            Secuencia.resetearSeleccionDeSecuencias()
+        }
+
+        juego.nivel = 3
+        for (i in 1..5)
+        {
+            println("Iteración $i")
+            val secuenciasGeneradas = juego.generarTresSecuencias()
+            for (secuencia in secuenciasGeneradas)
+            {
+                println(secuencia.elementosVisiblesToString())
+            }
+            Secuencia.resetearSeleccionDeSecuencias()
+        }
     }
 }
