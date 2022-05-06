@@ -1,5 +1,7 @@
 package com.uabc.computacion.jonathan1168659.primerexamen.view
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -8,13 +10,20 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.uabc.computacion.jonathan1168659.primerexamen.databinding.ActivityMainBinding
+import com.uabc.computacion.jonathan1168659.primerexamen.model.Score
 import com.uabc.computacion.jonathan1168659.primerexamen.viewmodel.JuegoSecuenciasViewModel
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import java.io.FileOutputStream
+import java.io.OutputStreamWriter
 
 class MainActivity : AppCompatActivity()
 {
     private lateinit var binding : ActivityMainBinding
     private val juegoSecuenciasViewModel : JuegoSecuenciasViewModel by viewModels()
     private lateinit var timer : CountDownTimer
+    private var tiempoTotal : Long = 0
+    private var archivoScores = "scores.txt"
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -38,12 +47,13 @@ class MainActivity : AppCompatActivity()
                 override fun onTick(millisUntilFinished: Long)
                 {
                     binding.temporizador.text = ("tiempo restante: " + millisUntilFinished / 1000)
+                    tiempoTotal++
                 }
 
                 override fun onFinish()
                 {
                     binding.temporizador.text = ("¡se acabó!")
-                    // TODO: registrar puntaje en el archivo
+                    registrarScore(tiempoTotal, juegoSecuenciasViewModel.nivel.value as Int, juegoSecuenciasViewModel.turno.value as Int)
                     habilitarComponentes(true)
                 }
             }.start()
@@ -65,6 +75,7 @@ class MainActivity : AppCompatActivity()
             juegoSecuenciasViewModel.reiniciarJuego()
             habilitarComponentes(false)
             limpiarRespuestas()
+            tiempoTotal = 0
         }
 
         //TODO: agregar un check a cada respuesta
@@ -100,6 +111,21 @@ class MainActivity : AppCompatActivity()
         }
     }
 
+    override fun onDestroy()
+    {
+        super.onDestroy()
+
+        try {
+            val fileOutputStream: FileOutputStream = openFileOutput(archivoScores, Context.MODE_PRIVATE)
+            val outputWriter = OutputStreamWriter(fileOutputStream)
+            outputWriter.write("")
+            outputWriter.close()
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     private fun comprobarRespuesta(view : View, hasFocus : Boolean)
     {
         if (!hasFocus)
@@ -129,5 +155,15 @@ class MainActivity : AppCompatActivity()
         binding.respuestaUno.text.clear()
         binding.respuestaDos.text.clear()
         binding.respuestaTres.text.clear()
+    }
+
+    private fun registrarScore(tiempo : Long, nivel : Int, turno : Int)
+    {
+        val score = Score(tiempo, nivel, turno)
+        val intentScore = Intent(this, ScoresActivity::class.java)
+        val scoreJson = Json.encodeToString(score)
+
+        intentScore.putExtra("score", scoreJson)
+        startActivity(intentScore)
     }
 }
