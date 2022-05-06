@@ -94,12 +94,11 @@ class JuegoSecuencias
     fun avanzarTurno()
     {
         jugadorAvanzoTurno = primeraRespuestaCorrecta && segundaRespuestaCorrecta && terceraRespuestaCorrecta
+        jugadorAvanzoNivel = turno == turnosPorNivel && jugadorAvanzoTurno
 
         if (jugadorAvanzoTurno)
         {
             resetearRespuestas()
-
-            jugadorAvanzoNivel = turno == turnosPorNivel
 
             if (jugadorAvanzoNivel)
             {
