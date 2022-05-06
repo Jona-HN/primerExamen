@@ -27,7 +27,7 @@ class ExampleUnitTest
         println(secuencia.toString())
         val secuencia2 = Secuencia.getNewInstance(1)
         println(secuencia2.toString())
-        println("secuencia == secuencia2 ? ${secuencia.compareTo(secuencia2)}")
+
         try
         {
             val secuencia3 = Secuencia.getNewInstance(0)
@@ -77,6 +77,18 @@ class ExampleUnitTest
                 println(secuencia.elementosVisiblesToString())
             }
             Secuencia.resetearSeleccionDeSecuencias()
+        }
+    }
+
+    @Test
+    fun testTiempo()
+    {
+        val juego = JuegoSecuencias()
+
+        for (nivel in 1..3)
+        {
+            juego.nivel = nivel
+            println("Nivel $nivel = ${juego.inicializarTiempo()} segundos")
         }
     }
 }
