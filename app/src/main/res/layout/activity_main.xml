@@ -4,15 +4,138 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".view.MainActivity">
 
     <TextView
+        android:id="@+id/temporizador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_marginTop="42dp"
+        android:layout_marginBottom="12dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/nivel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Aquí va el temporizador" />
+
+    <TextView
+        android:id="@+id/secuencia_tres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:gravity="start"
+        android:padding="5dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/respuesta_tres"
+        app:layout_constraintStart_toStartOf="@+id/respuesta_dos"
+        app:layout_constraintTop_toBottomOf="@+id/respuesta_dos"
+        tools:text="Tercera secuencia" />
+
+    <EditText
+        android:id="@+id/respuesta_uno"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="12dp"
+        android:ems="10"
+        android:hint="Respuesta"
+        android:inputType="text"
+        android:tag="1"
+        app:layout_constraintBottom_toTopOf="@+id/secuencia_dos"
+        app:layout_constraintEnd_toStartOf="@+id/turno"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/secuencia_uno" />
+
+    <EditText
+        android:id="@+id/respuesta_dos"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="10dp"
+        android:ems="10"
+        android:hint="Respuesta"
+        android:inputType="text"
+        android:tag="2"
+        app:layout_constraintBottom_toTopOf="@+id/secuencia_tres"
+        app:layout_constraintEnd_toStartOf="@+id/turno"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/secuencia_dos" />
+
+    <TextView
+        android:id="@+id/secuencia_uno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:gravity="start"
+        android:padding="5dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/respuesta_uno"
+        app:layout_constraintStart_toStartOf="@+id/respuesta_uno"
+        app:layout_constraintTop_toBottomOf="@+id/turno"
+        tools:text="Primera secuencia" />
+
+    <EditText
+        android:id="@+id/respuesta_tres"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="88dp"
+        android:ems="10"
+        android:hint="Respuesta"
+        android:inputType="text"
+        android:tag="3"
+        app:layout_constraintBottom_toTopOf="@+id/boton_inicio"
+        app:layout_constraintEnd_toEndOf="@+id/respuesta_uno"
+        app:layout_constraintStart_toStartOf="@+id/secuencia_tres"
+        app:layout_constraintTop_toBottomOf="@+id/secuencia_tres" />
+
+    <TextView
+        android:id="@+id/secuencia_dos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="start"
+        android:padding="5dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/respuesta_dos"
+        app:layout_constraintStart_toStartOf="@+id/respuesta_dos"
+        app:layout_constraintTop_toBottomOf="@+id/respuesta_uno"
+        tools:text="Segunda secuencia" />
+
+    <Button
+        android:id="@+id/boton_inicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="105dp"
+        android:text="Iniciar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/respuesta_tres" />
+
+    <TextView
+        android:id="@+id/nivel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="9dp"
+        android:text="Nivel: "
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/turno"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temporizador" />
+
+    <TextView
+        android:id="@+id/turno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="56dp"
+        android:text="Turno: "
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/secuencia_uno"
+        app:layout_constraintStart_toStartOf="@+id/nivel"
+        app:layout_constraintTop_toBottomOf="@+id/nivel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

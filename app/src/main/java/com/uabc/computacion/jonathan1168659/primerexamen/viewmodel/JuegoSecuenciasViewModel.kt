@@ -15,11 +15,15 @@ class JuegoSecuenciasViewModel : ViewModel()
     val terceraRespuestaCorrecta = MutableLiveData<Boolean>()
     val jugadorAvanzoTurno = MutableLiveData<Boolean>()
     val jugadorAvanzoNivel = MutableLiveData<Boolean>()
+    val turno = MutableLiveData<Int>()
+    val nivel = MutableLiveData<Int>()
 
     fun reiniciarJuego()
     {
-        juego.turno = 0
+        juego.turno = 1
         juego.nivel = 1
+        turno.postValue(juego.turno)
+        nivel.postValue(juego.nivel)
         juego.resetearRespuestas()
         primeraRespuestaCorrecta.postValue(juego.primeraRespuestaCorrecta)
         segundaRespuestaCorrecta.postValue(juego.segundaRespuestaCorrecta)
@@ -61,6 +65,8 @@ class JuegoSecuenciasViewModel : ViewModel()
             }
         }
 
+        turno.postValue(juego.turno)
+        nivel.postValue(juego.nivel)
         jugadorAvanzoTurno.postValue(juego.jugadorAvanzoTurno)
         jugadorAvanzoNivel.postValue(juego.jugadorAvanzoNivel)
 
