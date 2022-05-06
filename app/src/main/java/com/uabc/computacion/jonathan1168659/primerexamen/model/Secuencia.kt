@@ -6,8 +6,7 @@ class Secuencia private constructor(private val elementos: Array<String>) : Clon
     private val elementosVisibles = elementos.clone()
     var fueSeleccionada = false
         private set
-
-    fun compareTo(s : Secuencia) = this.elementos.contentEquals(s.elementos)
+    lateinit var respuestas : List<String>
 
     override fun toString() = elementos.joinToString(separator = " ")
 
