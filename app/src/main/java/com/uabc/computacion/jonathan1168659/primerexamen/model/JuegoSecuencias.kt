@@ -6,7 +6,7 @@ import kotlin.math.floor
 class JuegoSecuencias
 {
     var nivel = 1
-    var turno = 0
+    var turno = 1
     var jugadorAvanzoTurno = false
         private set
     var jugadorAvanzoNivel = false
@@ -97,15 +97,18 @@ class JuegoSecuencias
 
         if (jugadorAvanzoTurno)
         {
-            turno++
             resetearRespuestas()
 
             jugadorAvanzoNivel = turno == turnosPorNivel
 
             if (jugadorAvanzoNivel)
             {
-                turno = 0
+                turno = 1
                 nivel++
+            }
+            else
+            {
+                turno++
             }
         }
     }
